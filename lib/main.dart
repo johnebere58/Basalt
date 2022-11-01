@@ -20,8 +20,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Basalt',
       debugShowCheckedModeBanner: false,
-      navigatorKey: AppRouter.appNavigatorKey,
-      onGenerateRoute: AppRoutes.getRoute,
+      home: WillPopScope(
+        onWillPop: () async {
+          bool screenPopped = await AppRouter.appNavigatorKey.currentState?.maybePop() ?? false;
+          return !screenPopped;
+        },
+        child: Navigator(
+          key: AppRouter.appNavigatorKey,
+          onGenerateRoute: AppRoutes.getRoute,
+        ),
+      ),
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

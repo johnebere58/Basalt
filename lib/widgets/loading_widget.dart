@@ -113,15 +113,16 @@ class LoadingWidget extends StatelessWidget {
               height: size,
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(color: color.withOpacity(.3), width: 4)),
+                  border: Border.all(color: Colors.white, width: 2)),
               child: CircularProgressIndicator(
                 valueColor: AlwaysStoppedAnimation(color.withOpacity(.7)),
-                strokeWidth: 2,
+                strokeWidth: 4,
               )),
             Card(
               clipBehavior: Clip.antiAlias,
               margin: const EdgeInsets.only(top: 15),
               elevation: 5,
+              color: Colors.white.withOpacity(.1),
               shadowColor: Colors.black.withOpacity(.2),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5),
@@ -130,8 +131,8 @@ class LoadingWidget extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
                 child: Text(text,
-                    style: 12.asTextStyle(false,
-                        color: Colors.black.withOpacity(.5))),
+                    style: 12.asTextStyle(true,
+                        color: Colors.white.withOpacity(.5))),
               ),
             )
         ],

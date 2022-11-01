@@ -1,9 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
 part 'chart_data_model.g.dart';
 
-@JsonSerializable()
+// @JsonSerializable()
 class ChartDataModel{
-
   late double open;
   late double high;
   late double low;

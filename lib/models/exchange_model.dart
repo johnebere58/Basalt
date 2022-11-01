@@ -13,10 +13,10 @@ class ExchangeModel{
   late String country_code;
   late String city;
   late String website;
-  late CurrencyModel currency;
+  // late CurrencyModel currency;
 
   ExchangeModel(this.name, this.acronym, this.mic, this.country,
-      this.country_code, this.city, this.website, this.currency);
+      this.country_code, this.city, this.website);
 
   /// Connect the generated [_$ExchangeModelFromJson] function to the `fromJson`
   /// factory.

@@ -8,15 +8,15 @@ part of 'chart_data_model.dart';
 
 ChartDataModel _$ChartDataModelFromJson(Map<String, dynamic> json) =>
     ChartDataModel(
-      (json['open'] as num).toDouble(),
-      (json['high'] as num).toDouble(),
-      (json['low'] as num).toDouble(),
-      (json['last'] as num).toDouble(),
-      (json['close'] as num).toDouble(),
-      (json['volume'] as num).toDouble(),
-      json['date'] as String,
-      json['symbol'] as String,
-      json['exchange'] as String,
+      (json['open']??0).toDouble(),
+      (json['high']??0).toDouble(),
+      (json['low']??0).toDouble(),
+      (json['last']??0).toDouble(),
+      (json['close']??0).toDouble(),
+      (json['volume']??0).toDouble(),
+      (json['date']??"") as String,
+      (json['symbol']??"") as String,
+      (json['exchange']??"") as String,
     );
 
 Map<String, dynamic> _$ChartDataModelToJson(ChartDataModel instance) =>

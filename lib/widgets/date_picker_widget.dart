@@ -3,6 +3,7 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 class DatePickerWidget extends StatefulWidget {
   final String title;
+  final int? time;
   final Function(int time) onSelected;
   final double height;
 
@@ -10,6 +11,7 @@ class DatePickerWidget extends StatefulWidget {
       {required this.title,
       required this.onSelected,
       this.height = 55,
+        this.time,
       Key? key})
       : super(key: key);
 
@@ -22,6 +24,12 @@ class DatePickerWidgetState extends State<DatePickerWidget> {
   int? time;
 
   @override
+  void initState() {
+    time = widget.time;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
@@ -29,7 +37,7 @@ class DatePickerWidgetState extends State<DatePickerWidget> {
         DatePicker.showDatePicker(
           context,
           showTitleActions: true,
-          minTime: DateTime(1930, 12, 31),
+          minTime: DateTime.now().subtract(const Duration(days: 365)),
           maxTime: DateTime.now(),
           onChanged: (date) {},
           onConfirm: (date) {
@@ -46,9 +54,9 @@ class DatePickerWidgetState extends State<DatePickerWidget> {
         width: MediaQuery.of(context).size.width,
         padding: const EdgeInsets.fromLTRB(10, 0, 10, 0 ),
         decoration: BoxDecoration(
-            color: Colors.white,
             border:
-            Border.all(color: Colors.white, width: 1)),
+            Border.all(color: Colors.white, width: 1),
+        borderRadius: BorderRadius.circular(10)),
         child: Align(
           alignment: Alignment.centerLeft,
           child: Row(
@@ -58,8 +66,8 @@ class DatePickerWidgetState extends State<DatePickerWidget> {
                 child: Text(
                   time==null?widget.title:TimeUtils.formatTime2(time!),
                   style: 16.asTextStyle(false,color:
-                  time==null?Colors.black.withOpacity(.3)
-                          : Colors.black),
+                  time==null?Colors.white.withOpacity(.3)
+                          : Colors.white),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 )),

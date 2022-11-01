@@ -1,11 +1,11 @@
 import 'package:basalt/basalt.dart';
-import 'package:basalt/models/chart_data_model.dart';
+
 
 class StockViewModel extends BaseViewModel{
 
-  BuildContext _context;
-  int? startTimeMilli;
-  int? endTimeMilli;
+  BuildContext? _context;
+  int startTimeMilli = DateTime.now().subtract(const Duration(days: 60)).millisecondsSinceEpoch;
+  int endTimeMilli = DateTime.now().millisecondsSinceEpoch;
   List allItemList = [];
   List<ChartDataModel> itemList = [];
   double maxValue = 0;
@@ -27,6 +27,7 @@ class StockViewModel extends BaseViewModel{
     if(!silently)pageIsLoading=true;
     notifyListeners();
 
+    String symbol = (getArgs(_context!) as StockReportArgument).symbol;
     HttpService.getAPICall(ApiPaths.intraday, (response, error){
       if(error!=null){
         if(!silently)loadingError=error;
@@ -35,10 +36,23 @@ class StockViewModel extends BaseViewModel{
       }
 
       allItemList = response["data"]??[];
+      // for(Map map in list){
+      //   if(map.containsValue(null))continue;
+      //   allItemList.add(map);
+      // }
       filterResults();
       pageIsLoading=false;
       notifyListeners();
-    },data: {"symbols":(getArgs(_context) as StockReportArgument).symbol});
+    },data: {
+      "symbols":symbol,
+      "date_from":
+      TimeUtils.formatTime3(startTimeMilli),
+      "date_to":
+      TimeUtils.formatTime3(endTimeMilli),
+      "limit":50,
+      "interval":"24hour"
+    }
+    );
   }
 
   void filterResults(){
@@ -51,10 +65,10 @@ class StockViewModel extends BaseViewModel{
     maxVolume = 0;
     for (dynamic element in allItemList) {
       ChartDataModel chartDataModel = ChartDataModel.fromJson(element);
-      DateTime date = DateTime.parse(chartDataModel.date);
+      DateTime date = getRealTimeMilli(chartDataModel.date);
       int time = date.millisecondsSinceEpoch;
-      if(startTimeMilli!=null && time<startTimeMilli!)continue;
-      if(endTimeMilli!=null && time>endTimeMilli!)continue;
+      if(time<startTimeMilli)continue;
+      if(time>endTimeMilli)continue;
       itemList.add(chartDataModel);
       maxOpen = max(maxOpen, chartDataModel.open);
       maxHigh = max(maxHigh, chartDataModel.high);
@@ -72,4 +86,7 @@ class StockViewModel extends BaseViewModel{
     notifyListeners();
   }
 
+  DateTime getRealTimeMilli(String time){
+    return DateTime.parse(time);
+  }
 }

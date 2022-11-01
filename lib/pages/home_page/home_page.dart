@@ -1,7 +1,6 @@
 import 'package:basalt/basalt.dart';
 import  'dart:ui';
 
-import 'package:basalt/navigation/arguments/stock_report_argument.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -26,34 +25,41 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
 
-    return  Consumer<HomeViewModel>(
-      builder: (_,model,__) {
-        _model ??= model;
-        return Scaffold(
-            backgroundColor: Colors.white,
-            body:
-            Stack(
-              fit: StackFit.expand,
-              children: [
-                Image.asset(ImageAssets.stock,fit: BoxFit.cover,),
-                BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
-                    child: Container(
-                      color: Colors.black.withOpacity(.4),
-                    )),
-                model.loadingError!=null?
-                EmptyLayout(Icons.info, "Oops!", "${model.loadingError}",
-                  clickText: "Retry",click: (){
-                    model.loadItems();
-                  },titleColor: Colors.white,textColor: Colors.white,):
-                model.pageIsLoading?
-                const LoadingWidget(height: 200,
-                trans: true,)
-                    :body()
-              ],
-            )
-        );
-      }
+    return  WillPopScope(
+      onWillPop: (){
+        exit(0);
+      },
+      child: Consumer<HomeViewModel>(
+        builder: (_,model,__) {
+          _model ??= model;
+          return Scaffold(
+              backgroundColor: Colors.white,
+              body:
+              Stack(
+                fit: StackFit.expand,
+                children: [
+                  Image.asset(ImageAssets.stock,fit: BoxFit.cover,),
+                  ClipRect(
+                    child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
+                        child: Container(
+                          color: Colors.black.withOpacity(.4),
+                        )),
+                  ),
+                  model.loadingError!=null?
+                  EmptyLayout(Icons.info, "Oops!", "${model.loadingError}",
+                    clickText: "Retry",click: (){
+                      model.loadItems();
+                    },titleColor: Colors.white,textColor: Colors.white,):
+                  model.pageIsLoading?
+                  const LoadingWidget(height: 200,
+                  trans: true,)
+                      :body()
+                ],
+              )
+          );
+        }
+      ),
     );
   }
 
@@ -74,14 +80,14 @@ class _HomePageState extends State<HomePage> {
                   100.asHeight,
                   Column(
                     children: List.generate(_model!.itemList.length, (index){
-                      ExchangeModel exModel = ExchangeModel
+                      TickersModel tModel = TickersModel
                           .fromJson(_model!.itemList[index]);
                       return GestureDetector(
                           onTap: (){
                             Navigator.pushNamed(context, AppRoutes.stock,
-                                arguments: StockReportArgument(exModel.mic));
+                                arguments: StockReportArgument(tModel.symbol));
                           },
-                          child: ExchangeWidget(exModel));
+                          child: ExchangeWidget(tModel));
                     }),
                   ),
 

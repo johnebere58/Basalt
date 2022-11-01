@@ -1,16 +1,15 @@
-# basalt
+# Basalt Demo
 
-A new Flutter project.
+A sample app to display the stock market report of random companies using marketstack.com api 
+
+<p>
+    <img src="https://github.com/johnebere58/screenshots/blob/master/dialogpack_message_dialog.gif" width="auto" height="400px" hspace="20"/>
+
+</p>
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
 For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
+[online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+

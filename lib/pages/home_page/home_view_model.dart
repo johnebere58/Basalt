@@ -24,7 +24,7 @@ class HomeViewModel extends BaseViewModel{
     if(!silently)pageIsLoading=true;
     notifyListeners();
 
-    HttpService.getAPICall(ApiPaths.exchanges, (response, error){
+    HttpService.getAPICall(ApiPaths.tickers, (response, error){
       if(error!=null){
         loadingError=error;
         notifyListeners();

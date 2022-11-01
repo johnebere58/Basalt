@@ -18,7 +18,7 @@ class RootViewModel extends BaseViewModel {
       final mySystemTheme = SystemUiOverlayStyle.light
           .copyWith(systemNavigationBarColor: Colors.white);
       SystemChrome.setSystemUIOverlayStyle(mySystemTheme);
-      AppRouter.routeToHome(arguments: HomeArguments(message: "Sweetie"));
+      AppRouter.routeToHome();
     });
   }
 }

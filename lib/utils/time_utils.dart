@@ -14,4 +14,12 @@ class TimeUtils{
     return formatter.format(date);
   }
 
+  static String formatTime3(int milli) {
+    final formatter = DateFormat("yyyy-MM-dd");
+    DateTime date = DateTime.fromMillisecondsSinceEpoch(milli);
+    return formatter.format(date);
+  }
+
+
+
 }

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:basalt/basalt.dart';
 
 class RootWidget extends StatefulWidget {
@@ -25,35 +27,52 @@ class RootWidgetState extends State<RootWidget> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<RootViewModel>(
-      builder: (_, model, __) {
-        _model ??= model;
-        return Scaffold(
-          body: Stack(
-            fit: StackFit.expand,
-            children: [
-              Image.asset(
-                ImageAssets.background,
-                fit: BoxFit.cover,
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: Image.asset(
-                  ImageAssets.launchImage,
-                  width: 150,
-                  height: 150,
-                ),
-              ),
-              CircularRevealAnimation(
-                animation: _model!.getAnimation(animationController),
-                child: Container(
-                  color: Colors.white,
-                ),
-              ),
-            ],
-          ),
-        );
+    return WillPopScope(
+      onWillPop: (){
+        exit(0);
       },
+      child: Consumer<RootViewModel>(
+        builder: (_, model, __) {
+          _model ??= model;
+          return Scaffold(
+            body: Stack(
+              fit: StackFit.expand,
+              children: [
+                Image.asset(
+                  ImageAssets.background,
+                  fit: BoxFit.cover,
+                ),
+                Align(
+                  alignment: Alignment.center,
+                  child: Image.asset(
+                    ImageAssets.launchImage,
+                    width: 150,
+                    height: 150,
+                  ),
+                ),
+                CircularRevealAnimation(
+                  animation: _model!.getAnimation(animationController),
+                  child: Container(
+                    color: Colors.white,
+                    child: Stack(fit: StackFit.expand,
+                      children: [
+                        Image.asset(ImageAssets.stock,fit: BoxFit.cover,),
+                        ClipRect(
+                          child: BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
+                              child: Container(
+                                color: Colors.black.withOpacity(.4),
+                              )),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }

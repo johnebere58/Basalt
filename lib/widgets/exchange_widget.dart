@@ -1,8 +1,8 @@
 import 'package:basalt/basalt.dart';
-import 'package:basalt/models/exchange_model.dart';
+
 
 class ExchangeWidget extends StatelessWidget {
-  final ExchangeModel model;
+  final TickersModel model;
   const ExchangeWidget(this.model,{Key? key}) : super(key: key);
 
   @override
@@ -40,7 +40,7 @@ class ExchangeWidget extends StatelessWidget {
                     elevation: 5,
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(10,2,10,2),
-                      child: Text(model.currency.symbol,style: 11.asTextStyle(true,color: Colors.white),),
+                      child: Text(model.stock_exchange.acronym,style: 11.asTextStyle(true,color: Colors.white),),
                     ),
                   )
                 ],
@@ -48,7 +48,7 @@ class ExchangeWidget extends StatelessWidget {
               5.asHeight,
               RichText(text: TextSpan(
                   children: [
-                    TextSpan(text:"${model.acronym}${model.acronym.isNotEmpty&&model.mic.isNotEmpty?" | ":""}${model.mic}",style:
+                    TextSpan(text:model.symbol,style:
                     12.asTextStyle(false,color: Colors.white.withOpacity(.5)),),
                   ]
               )),
