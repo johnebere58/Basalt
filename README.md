@@ -4,6 +4,9 @@ A sample app to display the stock market report of random companies using market
 
 <p>
     <img src="https://github.com/johnebere58/screenshots/blob/master/basalt_shot.gif" width="auto" height="400px" hspace="20"/>
+    <img src="https://github.com/johnebere58/Basalt/blob/master/screenshots/shot1.jpg" width="auto" height="400px" hspace="20"/>
+    <img src="https://github.com/johnebere58/Basalt/blob/master/screenshots/shot2.jpg" width="auto" height="400px" hspace="20"/>
+    <img src="https://github.com/johnebere58/Basalt/blob/master/screenshots/shot3.jpg" width="auto" height="400px" hspace="20"/>
 
 </p>
 
