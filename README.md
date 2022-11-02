@@ -12,9 +12,9 @@ A sample app to display the stock market report of random companies using market
 
 ## Getting Started
 
-Register and get access key from [marketstack.com]
+Register and get access key from [marketstack](https://marketstack.com)
 
-Configure your accessToken in the [/lib/services/http_constants.dart] file 
+Configure your accessToken in the '/lib/services/http_constants.dart' file 
 
 ```dart
 class HttpConstants{
